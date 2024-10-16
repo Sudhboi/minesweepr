@@ -14,14 +14,14 @@ def get_surround(x, y, state_array):
     
     return points
 
-def get_point_flag(state_array):
+def get_points(state_array, flag):
     points = []
     for row in range(16):
         for elem in range(16):
             if state_array[row][elem] in ['1', '2', '3', '4', '5', '6', '7', '8']:
                 surr_elems = get_surround(elem, row, state_array)
                 print(elem, row, state_array[row][elem], surr_elems)
-                if surr_elems.count('C') == int(state_array[row][elem]):
+                if (surr_elems.count('C') + surr_elems.count('F') if flag else surr_elems.count('F')) == int(state_array[row][elem]):
                     for i in range(8):
                         if surr_elems[i] == 'C':
                             if i == 0 and (elem - 1, row - 1) not in points: points.append((elem - 1, row - 1))

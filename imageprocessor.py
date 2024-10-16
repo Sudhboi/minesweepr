@@ -11,9 +11,10 @@ im5 = Image.open("resources\\5.png")
 closed_tile = Image.open("resources\\closed.png")
 flag = Image.open("resources\\flag.png")
 open_tile = Image.open("resources\\open.png")
+mine = Image.open("resources\\mine.png")
 
-lookup_table = {'flag': flag, 'open_tile': open_tile, 'closed_tile': closed_tile, '1': im1, '2': im2, '3': im3, '4': im4, '5': im5}
-conversion_table = {'flag': "F", 'open_tile': "O", 'closed_tile': "C", '1': '1', '2': '2', '3': '3', '4': '4', '5': '5'}
+lookup_table = {'flag': flag, 'open_tile': open_tile, 'closed_tile': closed_tile, 'mine': mine, '1': im1, '2': im2, '3': im3, '4': im4, '5': im5}
+conversion_table = {'flag': "F", 'open_tile': "O", 'closed_tile': "C", 'mine': 'M', '1': '1', '2': '2', '3': '3', '4': '4', '5': '5'}
 
 def convert_to_array(state_image):
     state_array = []
