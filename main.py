@@ -3,6 +3,7 @@
 import actionmanager 
 import imageprocessor 
 
-actionmanager.reset()
-st = actionmanager.screenshot_board_state()
-st.show()
+state = actionmanager.screenshot_board_state()
+state_array = imageprocessor.convert_to_array(state)
+for i in state_array:
+    print(i)
