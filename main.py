@@ -5,6 +5,8 @@ import actionmanager
 import imageprocessor 
 import brain
 
+
+
 def start():
     actionmanager.reset()
     closed = []
@@ -14,26 +16,33 @@ def start():
         state_array = imageprocessor.convert_to_array(state_image)
         [closed.extend(i) for i in state_array]
 
-start()
-points = ['a']
-while points != []:
-    state_image = actionmanager.screenshot_board_state()
-    state_array = imageprocessor.convert_to_array(state_image)
-    points = brain.get_points(state_array, flag = True)
-    print(points)
-    actionmanager.execute_actions(points, flag = True)
 
-    state_image = actionmanager.screenshot_board_state()
-    state_array = imageprocessor.convert_to_array(state_image)
-    points = brain.get_points(state_array, flag = False)
-    print(points)
-    actionmanager.execute_actions(points, flag = False)
+def solve():
+    isRunning = True
 
+    start()
+    points = ['a']
+    while isRunning:
+        state_image = actionmanager.screenshot_board_state()
+        state_array = imageprocessor.convert_to_array(state_image)
+        points = brain.get_points(state_array, flag = True)
+        print(points)
+        actionmanager.execute_actions(points, flag = True)
 
-# state = 0 # 0 - Flagging, 1 - Checking, 2 - Guessing
-# isRunning = True
+        state_image = actionmanager.screenshot_board_state()
+        state_array = imageprocessor.convert_to_array(state_image)
+        points = brain.get_points(state_array, flag = False)
+        print(points)
+        actionmanager.execute_actions(points, flag = False)
 
-# while isRunning:
-#     if state == 0:
-#         points = brain.get_points_for_flag()
+        if brain.recognize_game_over(state_array) == "Mine Triggered":
+            return False
 
+        if brain.recognize_game_over(state_array) == "Won!":
+            return True
+        
+        if points == []:
+            cpoints = brain.clean_up(state_array)
+            if cpoints == []:
+                return True
+            actionmanager.execute_actions(cpoints, flag = False)

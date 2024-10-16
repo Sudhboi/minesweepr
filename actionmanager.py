@@ -41,3 +41,6 @@ def execute_actions(points, flag = False):
     for point in points:
         x, y = point
         click_tile(x, y, flag)
+
+
+screenshot_tile(5, 2, '6')

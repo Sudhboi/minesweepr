@@ -34,6 +34,22 @@ def get_points(state_array, flag):
                             if i == 7 and (elem + 1, row + 1) not in points: points.append((elem + 1, row + 1))
     return points
 
-
+def clean_up(state_array):
+    for row in range(16):
+        for elem in range(16):
+            if state_array[row][elem] == 'C':
+                return [(elem, row)]
+    return []
+            
+def recognize_game_over(state_array):
+    tiles = []
+    [tiles.extend(i) for i in state_array]
+    print(tiles)
+    if tiles.count("T") != 0:
+        return "Mine Triggered"
+    elif tiles.count("M") == 40:
+        return "Won!"
+    else:
+        return False
 
 
