@@ -10,10 +10,13 @@ pos0x , pos0y = refx - 121, refy + 34
 def return_coordinates(x, y):
     return pos0x + (16 * x), pos0y + (16 * y)
 
-def click_tile(x, y):
+def click_tile(x, y, flag = False):
     rx, ry = return_coordinates(x, y)
-    pg.moveTo(rx, ry, 0.5)
-    pg.click()
+    pg.moveTo(rx, ry)
+    if flag == False:
+        pg.click()
+    if flag == True:
+        pg.rightClick()
     print("Clicked {}, {} at {}, {}.".format(x, y, rx, ry))
 
 def reset():
@@ -33,3 +36,8 @@ def screenshot_tile(x, y, name): #Temporary, used for development
     reg = (sx - 7, sy - 7, 16, 16)
     screenshot = pg.screenshot(region=reg)
     screenshot.save("resources\\{}.png".format(name))
+
+def execute_actions(points, flag = False):
+    for point in points:
+        x, y = point
+        click_tile(x, y, flag)
