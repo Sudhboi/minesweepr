@@ -15,6 +15,7 @@ def start():
         state_image = actionmanager.screenshot_board_state()
         state_array = imageprocessor.convert_to_array(state_image)
         [closed.extend(i) for i in state_array]
+        
         if closed.count("M") > 0:
             return False
     return True

@@ -6,7 +6,7 @@ data = open("record.csv", 'a+', newline="\n")
 writer = csv.writer(data)
 runs = 0
 
-while runs < 1:
+while runs < 500:
     ctime = time.time()
     status = main.solve()
     print(status)
