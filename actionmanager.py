@@ -2,6 +2,10 @@
 
 import pyautogui as pg
 
+pg.MINIMUM_DURATION = 0
+pg.MINIMUM_SLEEP = 0
+pg.PAUSE = 0
+
 refx, refy = pg.locateCenterOnScreen('resources\\resetbutton.png', confidence = 0.5) 
 refx, refy = int(refx), int(refy)
 print("Reference Button Located Successfully.")

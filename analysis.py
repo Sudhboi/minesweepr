@@ -6,9 +6,12 @@ data = open("record.csv", 'a+')
 writer = csv.writer(data)
 runs = 1
 
-while runs < 300:
+while runs < 20:
     ctime = time.time()
-    status = main.solve()
+    try:
+        status = main.solve()
+    except:
+        status = False
     writer.writerow([time.time() - ctime, status])
     data.flush()
     runs += 1
