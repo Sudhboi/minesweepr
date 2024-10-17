@@ -2,7 +2,7 @@
 
 import pyautogui as pg
 
-pg.MINIMUM_DURATION = 0.1
+pg.MINIMUM_DURATION = 0
 pg.MINIMUM_SLEEP = 0
 pg.PAUSE = 0
 
@@ -45,6 +45,3 @@ def execute_actions(points, flag = False):
     for point in points:
         x, y = point
         click_tile(x, y, flag)
-
-
-screenshot_tile(10, 7, '6')

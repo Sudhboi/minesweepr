@@ -10,17 +10,20 @@ import brain
 def start():
     actionmanager.reset()
     closed = []
-    while closed.count("O") == 0 and closed.count("M") == 0:
+    while closed.count("O") == 0:
         actionmanager.click_tile(random.randint(0, 15), random.randint(0, 15))
         state_image = actionmanager.screenshot_board_state()
         state_array = imageprocessor.convert_to_array(state_image)
         [closed.extend(i) for i in state_array]
-
+        if closed.count("M") > 0:
+            return False
+    return True
 
 def solve():
     isRunning = True
 
-    start()
+    if start() == False:
+        return "Unlucky Start"
     points = ['a']
     while isRunning:
         state_image = actionmanager.screenshot_board_state()
@@ -36,13 +39,13 @@ def solve():
         actionmanager.execute_actions(points, flag = False)
 
         if brain.recognize_game_over(state_array) == "Mine Triggered":
-            return False
+            return "Triggered Mine"
 
         if brain.recognize_game_over(state_array) == "Won!":
-            return True
+            return "Won"
         
         if points == []:
             cpoints = brain.clean_up(state_array)
             if cpoints == []:
-                return True
+                return "Won"
             actionmanager.execute_actions(cpoints, flag = False)
