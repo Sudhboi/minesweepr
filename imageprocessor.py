@@ -31,7 +31,7 @@ def convert_to_array(state_image):
                     row.append(conversion_table[img_id])
                     break
             else:
-                row.append("U")
+                raise ValueError
         state_array.append(row)
     return state_array
 

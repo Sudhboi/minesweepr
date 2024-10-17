@@ -2,16 +2,13 @@ import main
 import time
 import csv
 
-data = open("record.csv", 'a+')
+data = open("record.csv", 'a+', newline="\n")
 writer = csv.writer(data)
-runs = 1
+runs = 0
 
-while runs < 20:
+while runs < 300:
     ctime = time.time()
-    try:
-        status = main.solve()
-    except:
-        status = False
+    status = main.solve()
     writer.writerow([time.time() - ctime, status])
     data.flush()
     runs += 1
